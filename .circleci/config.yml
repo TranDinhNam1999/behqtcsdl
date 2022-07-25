@@ -1,8 +1,5 @@
 version: 2.1
 
-orbs:
-  python: circleci/python@3.9
-
 jobs:
   build:
     docker:
@@ -13,16 +10,16 @@ jobs:
           name: Install Package
           command: |
             cd services/src
-            python -m poetry install
+            python3 -m poetry install
       - run:
           name: Running tests
           command: |
-            python -m poetry run black . --check
-            python -m poetry run isort . --check-only --profile black
-            python -m poetry run flake8 . '--per-file-ignores=app/schemas/*:N815,app/models/*:N815'
-            python -m poetry run bandit .
-            python -m poetry run safety check
-            python -m poetry run python -m pytest --junitxml=report.xml --cov=./ --cov-report=xml app/tests/integration
+            python3 -m poetry run black . --check
+            python3 -m poetry run isort . --check-only --profile black
+            python3 -m poetry run flake8 . '--per-file-ignores=app/schemas/*:N815,app/models/*:N815'
+            python3 -m poetry run bandit .
+            python3 -m poetry run safety check
+            python3 -m poetry run python -m pytest --junitxml=report.xml --cov=./ --cov-report=xml app/tests/integration
       - store_artifacts:
           path: services/src/
           destination: report.xml

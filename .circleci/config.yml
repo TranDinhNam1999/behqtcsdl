@@ -15,6 +15,7 @@ jobs:
       - run:
           name: Running tests
           command: |
+            cd services/src
             python3 -m poetry run black . --check
             python3 -m poetry run isort . --check-only --profile black
             python3 -m poetry run flake8 . '--per-file-ignores=app/schemas/*:N815,app/models/*:N815'

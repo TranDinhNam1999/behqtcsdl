@@ -9,6 +9,7 @@ jobs:
       - run:
           name: Install Package
           command: |
+            pip3 install poetry
             cd services/src
             python3 -m poetry install
       - run:

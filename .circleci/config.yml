@@ -1,0 +1,37 @@
+version: 2.1
+
+orbs:
+  python: circleci/python@3.10.2
+
+jobs:
+  build:
+    docker:
+      - image: cimg/python:3.10.2
+    steps:
+      - checkout
+      - run:
+          name: Install Package
+          command: |
+            cd services/src
+            python -m poetry install
+      - run:
+          name: Running tests
+          command: |
+            python -m poetry run black . --check
+            python -m poetry run isort . --check-only --profile black
+            python -m poetry run flake8 . '--per-file-ignores=app/schemas/*:N815,app/models/*:N815'
+            python -m poetry run bandit .
+            python -m poetry run safety check
+            python -m poetry run python -m pytest --junitxml=report.xml --cov=./ --cov-report=xml app/tests/integration
+      - store_artifacts:
+          path: services/src/
+          destination: report.xml
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build

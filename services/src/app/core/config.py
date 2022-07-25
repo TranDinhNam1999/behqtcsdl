@@ -19,9 +19,7 @@ class LoggingSettings(BaseSettings):
 
 class DBSettings(BaseSettings):
     # SQLALCHEMY_DATABASE_URI: str = "postgresql://<user_name>:<password>@<hostname>:5432/<db_name>?sslmode=allow"  # noqa: E501
-    POSTGRES_DATABASE_HOST: str = (
-        "<hostname>:5432"
-    )
+    POSTGRES_DATABASE_HOST: str = "<hostname>:5432"
     POSTGRES_DATABASE_NAME: str = ""
     POSTGRES_DATABASE_USER: str = ""
     POSTGRES_DATABASE_PASSWORD: str = ""
@@ -61,8 +59,7 @@ def setup_app_logging(config: Settings) -> None:
     logging.getLogger().handlers = [InterceptHandler()]
     for logger_name in config.logging.LOGGERS:
         logging_logger = logging.getLogger(logger_name)
-        logging_logger.handlers = [InterceptHandler(
-            level=config.logging.LOGGING_LEVEL)]
+        logging_logger.handlers = [InterceptHandler(level=config.logging.LOGGING_LEVEL)]
 
     logger.configure(
         handlers=[

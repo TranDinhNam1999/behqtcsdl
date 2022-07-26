@@ -20,8 +20,8 @@ class LoggingSettings(BaseSettings):
 class DBSettings(BaseSettings):
     # SQLALCHEMY_DATABASE_URI: str = "postgresql://<user_name>:<password>@<hostname>:5432/<db_name>?sslmode=allow"  # noqa: E501
     POSTGRES_DATABASE_HOST: str = "<hostname>:5432"
-    POSTGRES_DATABASE_NAME: str = ""
-    POSTGRES_DATABASE_USER: str = ""
+    POSTGRES_DATABASE_NAME: str = "postgres"
+    POSTGRES_DATABASE_USER: str = "postgres"
     POSTGRES_DATABASE_PASSWORD: str = ""
     SQLALCHEMY_POOL_PRE_PING: int = 1
     SQLALCHEMY_POOL_SIZE: int = 25
@@ -38,12 +38,11 @@ class DBSettings(BaseSettings):
 class Settings(BaseSettings):
     ENV: str = "DEV"
 
-    API_NAME: str = "User API"
+    API_NAME: str = "Be APIs"
     API_V1_STR: str = "/api/v1"
     API_DOC: str = "openapi.json"
-    API_KEY_NAME: str = ""
-    API_KEY_VALUE: str = ""
-    API_KEY_UNIQUE_VALUE: str = ""
+    API_KEY_NAME: str = "Be-Authorization"
+    API_KEY_VALUE: str = "xxxx"
     API_TRACE_NAME: str = ""
 
     db: DBSettings = DBSettings()

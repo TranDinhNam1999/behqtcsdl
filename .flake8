@@ -1,0 +1,15 @@
+[flake8]
+max-line-length = 120
+exclude =
+    .git,
+    build,
+    dist,
+    migrations,
+    alembic,
+    .venv
+max-complexity = 20
+docstring_style=sphinx
+per-file-ignores = 
+    services/src/app/schemas/*: N815
+    services/src/app/models/*: N815
+

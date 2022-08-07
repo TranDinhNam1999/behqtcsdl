@@ -1,0 +1,16 @@
+from app.db.base_class import Base  # noqa
+from app.models.bank_account import BankAccount  # noqa
+from app.models.branch import Branch  # noqa
+from app.models.branch_address import BranchAddress  # noqa
+from app.models.contract import Contract  # noqa
+from app.models.delivery_address import DeliveryAddress  # noqa
+from app.models.driver import Driver  # noqa
+from app.models.employee import Employee  # noqa
+from app.models.group import Group  # noqa
+from app.models.home_address import HomeAddress  # noqa
+from app.models.order import Order  # noqa
+from app.models.partner import Partner  # noqa
+from app.models.pay import Pay  # noqa
+from app.models.product import Product  # noqa
+from app.models.role import Role  # noqa
+from app.models.user import User  # noqa

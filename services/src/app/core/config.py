@@ -18,11 +18,11 @@ class LoggingSettings(BaseSettings):
 
 
 class DBSettings(BaseSettings):
-    # SQLALCHEMY_DATABASE_URI: str = "postgresql://<user_name>:<password>@<hostname>:5432/<db_name>?sslmode=allow"  # noqa: E501
-    POSTGRES_DATABASE_HOST: str = "<hostname>:5432"
-    POSTGRES_DATABASE_NAME: str = "postgres"
-    POSTGRES_DATABASE_USER: str = "postgres"
-    POSTGRES_DATABASE_PASSWORD: str = ""
+    # SQLALCHEMY_DATABASE_URI: str = "mssql+pymssql://<user_name>:<password>@<hostname>:<port>/<db_name>?sslmode=allow"  # noqa: E501
+    MSSQL_DATABASE_HOST: str = "<hostname>:<port>"
+    MSSQL_DATABASE_NAME: str = "<username>"
+    MSSQL_DATABASE_USER: str = "<password>"
+    MSSQL_DATABASE_PASSWORD: str = ""
     SQLALCHEMY_POOL_PRE_PING: int = 1
     SQLALCHEMY_POOL_SIZE: int = 25
     SQLALCHEMY_MAX_OVERFLOW: int = 5
@@ -32,7 +32,7 @@ class DBSettings(BaseSettings):
     SQLALCHEMY_SESSION_AUTOFLUSH: int = 0
 
     def construct_db_uri(self):
-        return f"postgresql://{self.POSTGRES_DATABASE_USER}:{self.POSTGRES_DATABASE_PASSWORD}@{self.POSTGRES_DATABASE_HOST}/{self.POSTGRES_DATABASE_NAME}?sslmode=allow"  # noqa: E501
+        return f"mssql+pymssql://{self.MSSQL_DATABASE_USER}:{self.MSSQL_DATABASE_PASSWORD}@{self.MSSQL_DATABASE_HOST}/{self.MSSQL_DATABASE_NAME}?sslmode=allow"  # noqa: E501
 
 
 class Settings(BaseSettings):
@@ -43,7 +43,9 @@ class Settings(BaseSettings):
     API_DOC: str = "openapi.json"
     API_KEY_NAME: str = "Be-Authorization"
     API_KEY_VALUE: str = "xxxx"
-    API_TRACE_NAME: str = ""
+    API_TRACE_NAME: str = "X-Trace-Id"
+
+    SUPPORTED_DOB_FORMATS: str = "%Y,%d-%m-%Y,%d/%m/%Y,%d.%m.%Y"
 
     db: DBSettings = DBSettings()
     logging: LoggingSettings = LoggingSettings()

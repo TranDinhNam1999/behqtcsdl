@@ -32,8 +32,12 @@ def datetime_validator(value, fmt="%Y-%m-%dT%H:%M:%S.%f%z"):
     if value:
         try:
             if isinstance(value, str):
-                return datetime.strptime(value, fmt)
-            if isinstance(value, datetime):
+                try:
+                    datetime.strptime(value, fmt)
+                except Exception as e:
+                    raise e
                 return value
+            # if isinstance(value, datetime):
+            #     return value
         except ValueError as e:
             raise e

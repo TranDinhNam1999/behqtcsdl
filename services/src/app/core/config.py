@@ -36,7 +36,7 @@ class DBSettings(BaseSettings):
         logger.info(self.MSSQL_DATABASE_NAME)
         logger.info(self.MSSQL_DATABASE_USER)
         logger.info(self.MSSQL_DATABASE_PASSWORD)
-        return f"mssql+pymssql://{self.MSSQL_DATABASE_USER}:{self.MSSQL_DATABASE_PASSWORD}@{self.MSSQL_FREETDS_NAME}/{self.MSSQL_DATABASE_NAME}/?charset=utf8"  # noqa: E501
+        return f"mssql+pymssql://{self.MSSQL_DATABASE_USER}:{self.MSSQL_DATABASE_PASSWORD}@{self.MSSQL_FREETDS_NAME}/{self.MSSQL_DATABASE_NAME}"  # noqa: E501
         # return f"mssql+pyodbc://{self.MSSQL_DATABASE_USER}@{self.MSSQL_DATABASE_HOST}/{self.MSSQL_DATABASE_NAME}?driver=ODBC+Driver+17+for+SQL+Server"  # noqa: E501
 
 

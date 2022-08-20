@@ -1,4 +1,3 @@
-from datetime import datetime
 from typing import Optional
 
 import app.core.validators as vls
@@ -24,7 +23,11 @@ class UserBase(BaseModel):
 class UserCreate(UserBase):
     id_user: str
     username: str
-    created_date: datetime
+    created_date: str
+    created_by: str
+    is_employee: Optional[int]
+    is_driver: Optional[int]
+    is_partner: Optional[int]
 
     @validator("id_user")
     def user_id_validator(cls, value):  # noqa: N805
@@ -34,24 +37,20 @@ class UserCreate(UserBase):
     def parse_created_at(cls, value):  # noqa: N805
         return vls.datetime_validator(value)
 
+    @validator("created_by")
+    def created_by_validator(cls, value):  # noqa: N805
+        return vls.uuid_validator(value)
+
 
 class UserInDB(UserCreate):
-    create_by: str
-    is_employee: int
-    is_driver: int
-    is_partner: int
-    status: int
+    status: Optional[int]
 
     class Config:
         orm_mode = True
 
-    @validator("create_by")
-    def user_id_validator(cls, value):  # noqa: N805
-        return vls.uuid_validator(value)
-
 
 class UserUpdate(UserBase):
-    modified_date: datetime
+    modified_date: str
     modified_by: str
 
     @validator("modified_date", pre=True)

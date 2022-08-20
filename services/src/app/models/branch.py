@@ -15,7 +15,7 @@ class Branch(Base):
         nullable=False,
         index=True,
     )
-    create_by = Column(String(36), nullable=True)
+    created_by = Column(String(36), nullable=True)
     modified_date = Column(
         DateTime(timezone=False),
         server_default=func.now(),

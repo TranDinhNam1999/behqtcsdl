@@ -28,7 +28,7 @@ class Contract(Base):
         nullable=False,
         index=True,
     )
-    create_by = Column(String(36), nullable=True)
+    created_by = Column(String(36), nullable=True)
 
     employee = relationship("Employee", back_populates="contract")
     partner = relationship("Partner", back_populates="contract")

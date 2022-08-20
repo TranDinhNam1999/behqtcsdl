@@ -12,7 +12,7 @@ class CRUDUser(CRUDBase[User, UserInDB, UserUpdate]):
         return db.query(User).filter(User.id_user == id).first()
 
     def get_by_phone(self, db: Session, *, phone: str) -> Optional[User]:
-        return db.query(User).filter(User.phone == phone).first()
+        return db.query(User).filter(User.phone_number == phone).first()
 
     def create(self, db: Session, *, obj_in: UserInDB) -> Optional[User]:
         try:

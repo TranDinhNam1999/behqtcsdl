@@ -46,28 +46,29 @@ async def create_user(
                 code=status.HTTP_500_INTERNAL_SERVER_ERROR, msg="Error insert new user"
             )
 
-        logger.debug(f"outgoing response {user_out.dict()}")
+        logger.debug(f"outgoing response {user_out}")
     except Exception as e:
         logger.warning(e)
-        rollback_user = crud.user.delete(db=db, id=user_in.id_user)
+        # rollback_user = crud.user.delete(db=db, id=user_in.id_user)
 
-        if not rollback_user:
-            raise CustomHTTPException(
-                code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                msg="Error rollback new user",
-            )
+        # if not rollback_user:
+        #     raise CustomHTTPException(
+        #         code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+        #         msg="Error rollback new user",
+        #     )
 
         raise CustomHTTPException(
             code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             msg="Error insert new user credit",
         )
 
+    user_response: UserInDB = UserInDB(**user_in.dict())
     logger.bind(trace_id=trace_id).success(
-        f"Outgoing response /POST user {user_out.dict()}"
+        f"Outgoing response /POST user {user_response.dict()}"
     )
 
     return UserResponse(
         code=status.HTTP_200_OK,
         message="Successful",
-        data=user_out,
+        data=user_response,
     )

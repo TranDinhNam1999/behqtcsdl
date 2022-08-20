@@ -19,10 +19,10 @@ class LoggingSettings(BaseSettings):
 
 class DBSettings(BaseSettings):
     # SQLALCHEMY_DATABASE_URI: str = "mssql+pymssql://<user_name>:<password>@<hostname>:<port>/<db_name>?sslmode=allow"  # noqa: E501
-    MSSQL_DATABASE_HOST: str = "<hostname>:<port>"
-    MSSQL_DATABASE_NAME: str = "<username>"
-    MSSQL_DATABASE_USER: str = "<password>"
-    MSSQL_DATABASE_PASSWORD: str = ""
+    MSSQL_FREETDS_NAME: str = "<freetds>"
+    MSSQL_DATABASE_NAME: str = "<dbname>"
+    MSSQL_DATABASE_USER: str = "<username>"
+    MSSQL_DATABASE_PASSWORD: str = "<password>"
     SQLALCHEMY_POOL_PRE_PING: int = 1
     SQLALCHEMY_POOL_SIZE: int = 25
     SQLALCHEMY_MAX_OVERFLOW: int = 5
@@ -32,7 +32,12 @@ class DBSettings(BaseSettings):
     SQLALCHEMY_SESSION_AUTOFLUSH: int = 0
 
     def construct_db_uri(self):
-        return f"mssql+pymssql://{self.MSSQL_DATABASE_USER}:{self.MSSQL_DATABASE_PASSWORD}@{self.MSSQL_DATABASE_HOST}/{self.MSSQL_DATABASE_NAME}?sslmode=allow"  # noqa: E501
+        logger.info(self.MSSQL_FREETDS_NAME)
+        logger.info(self.MSSQL_DATABASE_NAME)
+        logger.info(self.MSSQL_DATABASE_USER)
+        logger.info(self.MSSQL_DATABASE_PASSWORD)
+        return f"mssql+pymssql://{self.MSSQL_DATABASE_USER}:{self.MSSQL_DATABASE_PASSWORD}@{self.MSSQL_FREETDS_NAME}/{self.MSSQL_DATABASE_NAME}"  # noqa: E501
+        # return f"mssql+pyodbc://{self.MSSQL_DATABASE_USER}@{self.MSSQL_DATABASE_HOST}/{self.MSSQL_DATABASE_NAME}?driver=ODBC+Driver+17+for+SQL+Server"  # noqa: E501
 
 
 class Settings(BaseSettings):

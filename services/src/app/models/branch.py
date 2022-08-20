@@ -15,7 +15,7 @@ class Branch(Base):
         nullable=False,
         index=True,
     )
-    create_by = Column(String(36), nullable=True)
+    created_by = Column(String(36), nullable=True)
     modified_date = Column(
         DateTime(timezone=False),
         server_default=func.now(),
@@ -24,7 +24,7 @@ class Branch(Base):
         index=True,
     )
     modified_by = Column(String(36), nullable=True)
-    is_deleted = Column(Integer, server_default=0, nullable=False)
+    status = Column(Integer, default=0, nullable=False)
 
     branch_address = relationship("BranchAddress", back_populates="branch")
     partner = relationship("Partner", back_populates="branch")

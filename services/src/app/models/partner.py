@@ -23,3 +23,6 @@ class Partner(Base):
     contract = relationship(
         "Contract", back_populates="partner", cascade="all, delete-orphan"
     )
+    order = relationship(
+        "Order", back_populates="partner", cascade="all, delete-orphan"
+    )

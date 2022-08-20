@@ -24,7 +24,7 @@ class Branch(Base):
         index=True,
     )
     modified_by = Column(String(36), nullable=True)
-    is_deleted = Column(Integer, server_default=0, nullable=False)
+    status = Column(Integer, default=0, nullable=False)
 
     branch_address = relationship("BranchAddress", back_populates="branch")
     partner = relationship("Partner", back_populates="branch")

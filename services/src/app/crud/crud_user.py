@@ -9,7 +9,7 @@ from sqlalchemy.orm import Session
 
 class CRUDUser(CRUDBase[User, UserInDB, UserUpdate]):
     def get_by_id(self, db: Session, *, id: str) -> Optional[User]:
-        return db.query(User).filter(User.userId == id).first()
+        return db.query(User).filter(User.id_user == id).first()
 
     def get_by_phone(self, db: Session, *, phone: str) -> Optional[User]:
         return db.query(User).filter(User.phone == phone).first()

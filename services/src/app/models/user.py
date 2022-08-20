@@ -31,7 +31,7 @@ class User(Base):
     is_employee = Column(Integer, default=0, nullable=False)
     is_driver = Column(Integer, default=0, nullable=False)
     is_partner = Column(Integer, default=0, nullable=False)
-    status = Column(Integer, default=0, nullable=False)
+    status = Column(Integer, default=1, nullable=False)
 
     order = relationship("Order", back_populates="user", cascade="all, delete-orphan")
     driver = relationship("Driver", back_populates="user", cascade="all, delete-orphan")
